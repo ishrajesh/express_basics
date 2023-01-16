@@ -1,10 +1,17 @@
 const express = require('express');
+const path = require('path');
 
 const app = express();
 
-app.get('/',(req,res) => { 
-    res.send('<h1>Hellow World</h1>')
- })
+// // instead of setting routes for all paths, 
+// // we can set the folder as static folder
+// app.get('/',(req,res) => { 
+//     res.sendFile(path.join(__dirname,'public','index.html'));
+//  })
+
+// Set static folder
+app.use(express.static(path.join(__dirname, 'public')))
+
 
 const PORT = process.env.PORT || 5000;
 
