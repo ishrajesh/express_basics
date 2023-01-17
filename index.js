@@ -1,22 +1,16 @@
 const express = require('express');
 const path = require('path');
+const logger = require('./middleware/logger');
+
 const app = express();
-const members = require('./Members');
 
-
-// // instead of setting routes for all paths, 
-// // we can set the folder as static folder
-// app.get('/',(req,res) => { 
-//     res.sendFile(path.join(__dirname,'public','index.html'));
-//  })
-
-
-// This route gets all members
-app.get('/api/members', (req,res)=> res.json(members))
+//Init Middleware
+// app.use(logger);
 
 // Set static folder
 app.use(express.static(path.join(__dirname, 'public')))
 
+app.use('/api/members', require('./routes/api/members'))
 
 const PORT = process.env.PORT || 5000;
 
